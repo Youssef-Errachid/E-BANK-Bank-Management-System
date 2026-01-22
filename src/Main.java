@@ -17,9 +17,9 @@ public class Main {
         System.out.println("  5. Deposit money");
         System.out.println("  6. withdraw money");
         System.out.println("  7. Delete account");
-        System.out.println("  8. ");
-        System.out.println("  9. ");
-        System.out.println("  0. ");
+        System.out.println("  8. Create a savings account");
+        System.out.println("  9. Export accounts to Excel");
+        System.out.println("  0. Exit");
         System.out.println("========================================");
     }
    static private void controller(int choice) {
@@ -168,11 +168,6 @@ public class Main {
                 row.createCell(1).setCellValue(account.getClient().getName());
                 row.createCell(2).setCellValue(account.getType());
                 row.createCell(3).setCellValue(account.getBalance());
-            }
-
-            // Auto-size columns
-            for (int i = 0; i < headers.length; i++) {
-                sheet.autoSizeColumn(i);
             }
 
             // Write to file
