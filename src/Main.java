@@ -1,6 +1,5 @@
 import java.io.FileOutputStream;
 import java.util.Scanner;
-
 import org.apache.poi.ss.usermodel.*;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 
@@ -188,8 +187,6 @@ public class Main {
             System.out.println("Error exporting to Excel: " + e.getMessage());
         }
     }
-
-
    static public int getChoicenumber(){
         int number= 0;
        System.out.println("Enter your Choice");
@@ -211,6 +208,4 @@ public class Main {
     }while(tryagain == 'y' ||  tryagain == 'Y');
 
 }
-
-
 }

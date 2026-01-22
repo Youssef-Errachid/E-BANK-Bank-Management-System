@@ -1,16 +1,13 @@
 import java.util.ArrayList;
 import java.util.List;
 
-    public class Bank  {
+public class Bank  {
     private static List<Client> clients = new ArrayList<>();
     private static List<Account> accounts = new ArrayList<>();
-
-
     public Bank(){
     this.clients = new ArrayList<>();
     this.accounts = new ArrayList<>();
 }
-
     public static void addClient(Client client) {
         for (Client c : clients) {
             if (c.getCustomerNumber() == (client.getCustomerNumber())) {
@@ -110,8 +107,7 @@ import java.util.List;
         }
 
     }
-        public boolean createSavingsAccount(String accountNumber, double initialBalance,
-                                            String customerNumber, double interestRate) {
+    public boolean createSavingsAccount(String accountNumber, double initialBalance,String customerNumber, double interestRate) {
             // Check if account number already exists
             if (findAccount(accountNumber) != null) {
                 System.out.println("Error: An account with this number already exists.");
@@ -140,5 +136,4 @@ import java.util.List;
             System.out.println("Savings account created successfully for " + client.getName());
             return true;
         }
-
 }
