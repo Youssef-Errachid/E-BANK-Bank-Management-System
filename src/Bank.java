@@ -16,7 +16,6 @@ public class Bank  {
             }
         }
         clients.add(client);
-        System.out.println("Client added successfully: \n" + "Client ID: "+ client.getId() + "\n"+ "Client Name: " + client.getName() + "\n" +"Client Number: " + client.getCustomerNumber());
     }
     public static void displayAllAccounts() {
     if(accounts.isEmpty()){
@@ -24,6 +23,7 @@ public class Bank  {
         return;
     }
     for(Account a : accounts){
+
         System.out.println(a);
     }
 }

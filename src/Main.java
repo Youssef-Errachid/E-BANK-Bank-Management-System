@@ -11,14 +11,13 @@ public class Main {
         System.out.println("              MAIN MENU");
         System.out.println("========================================");
         System.out.println("  1. Display all accounts");
-        System.out.println("  2. Add a customer");
-        System.out.println("  3. Create a bank account");
-        System.out.println("  4. Check balance");
-        System.out.println("  5. Deposit money");
-        System.out.println("  6. withdraw money");
-        System.out.println("  7. Delete account");
-        System.out.println("  8. Create a savings account");
-        System.out.println("  9. Export accounts to Excel");
+        System.out.println("  2. Create a bank account");
+        System.out.println("  3. Check balance");
+        System.out.println("  4. Deposit money");
+        System.out.println("  5. withdraw money");
+        System.out.println("  6. Delete account");
+        System.out.println("  7. Create a savings account");
+        System.out.println("  8. Export accounts to Excel");
         System.out.println("  0. Exit");
         System.out.println("========================================");
     }
@@ -28,58 +27,53 @@ public class Main {
                 Bank.displayAllAccounts();
                 break;
             case 2:
-                getClientinfo();
-                break;
-            case 3:
                 getAccountinfo();
                 break;
-            case 4:
+            case 3:
                 checkBalance();
                 break;
-            case 5:
+            case 4:
                 getAmounttodeposit();
                 break;
-            case 6:
+            case 5:
                 getAmounttowithdraw();
                 break;
-            case 7:
+            case 6:
                 deleteAccount();
                 break;
-            case 8:
+            case 7:
                 createSavingsAccount();
-            case 9:
+            case 8:
                 exportToExcel();
             case 0:
                 System.out.println("Exit the program");
                 System.exit(0);
                 break;
-
         }
     }
-    public static void getClientinfo(){
-        System.out.println("\t Add New Client");
 
-        System.out.println("Enter Customer ID:");
-        int id = scanner.nextInt();
-        scanner.nextLine();
-        System.out.println("Enter Customer name:");
-        String name = scanner.nextLine();
-        System.out.println("Enter Customer number: ");
-        String customerNumber = scanner.nextLine();
-        Client client = new Client(id,name,customerNumber);
-        Bank.addClient(client);
-    }
     public static void getAccountinfo() {
-        System.out.println("=== CREATE BANK ACCOUNT ===");
 
-        System.out.print("Enter account number: ");
-        String accountNumber = scanner.nextLine();
+            System.out.println("=== CREATE BANK ACCOUNT ===");
+
+            System.out.println("Enter Customer ID:");
+            int id = scanner.nextInt();
+            scanner.nextLine();
+
+            System.out.println("Enter Customer name:");
+            String name = scanner.nextLine();
+
+            System.out.println("Enter Customer number: ");
+            String customerNumber = scanner.nextLine();
+
+            Client client = new Client(id,name,customerNumber);
+            Bank.addClient(client);
+
+            System.out.print("Enter account number: ");
+            String accountNumber = scanner.nextLine();
 
             System.out.print("Enter initial balance: ");
             double initialBalance = Double.parseDouble(scanner.nextLine());
-
-            System.out.print("Enter customer number: ");
-            String customerNumber = scanner.nextLine();
 
             bank.createAccount(accountNumber, initialBalance, customerNumber);
     }
