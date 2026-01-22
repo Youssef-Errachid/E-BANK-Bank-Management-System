@@ -1,7 +1,7 @@
 import java.util.ArrayList;
 import java.util.List;
 
-    public class Bank {
+    public class Bank  {
     private static List<Client> clients = new ArrayList<>();
     private static List<Account> accounts = new ArrayList<>();
 
@@ -21,7 +21,7 @@ import java.util.List;
         clients.add(client);
         System.out.println("Client added successfully: \n" + "Client ID: "+ client.getId() + "\n"+ "Client Name: " + client.getName() + "\n" +"Client Number: " + client.getCustomerNumber());
     }
-    public static void getAllAccounts(){
+    public static void displayAllAccounts() {
     if(accounts.isEmpty()){
         System.out.println("No accounts found");
         return;
@@ -30,6 +30,9 @@ import java.util.List;
         System.out.println(a);
     }
 }
+    public List<Account> getAccounts() {
+            return accounts;
+        }
     public boolean createAccount(String accountNumber, double initialBalance, String customerNumber) {
         if (findAccount(accountNumber) != null) {
             System.out.println("this Account already exists");
@@ -98,8 +101,13 @@ import java.util.List;
         if (account == null) {
             System.out.println("Account with customer number: " + accountNumber + " not found");
         }
-        accounts.remove(account);
-        System.out.println("Account number: " + accountNumber + " is deleted successfully");
+
+        if(account.balance > 0 ){
+            System.out.println("you can't delete your account");
+        }else {
+            accounts.remove(account);
+            System.out.println("Account number: " + accountNumber + " is deleted successfully");
+        }
 
     }
         public boolean createSavingsAccount(String accountNumber, double initialBalance,

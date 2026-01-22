@@ -1,5 +1,9 @@
 import java.io.FileOutputStream;
 import java.util.Scanner;
+
+import org.apache.poi.ss.usermodel.*;
+import org.apache.poi.xssf.usermodel.XSSFWorkbook;
+
 public class Main {
     private static Bank bank = new Bank();
     static Scanner scanner = new Scanner(System.in);
@@ -22,7 +26,7 @@ public class Main {
    static private void controller(int choice) {
         switch (choice) {
             case 1:
-                Bank.getAllAccounts();
+                Bank.displayAllAccounts();
                 break;
             case 2:
                 getClientinfo();
@@ -44,14 +48,12 @@ public class Main {
                 break;
             case 8:
                 createSavingsAccount();
+            case 9:
+                exportToExcel();
             case 0:
                 System.out.println("Exit the program");
                 System.exit(0);
                 break;
-
-
-
-
 
         }
     }
@@ -135,7 +137,7 @@ public class Main {
     private static void exportToExcel() {
         System.out.println("=== EXPORT TO EXCEL ===");
 
-        if (bank.getAllAccounts().isEmpty()) {
+        if (bank.getAccounts().isEmpty()) {
             System.out.println("No accounts to export.");
             return;
         }
@@ -161,11 +163,11 @@ public class Main {
 
             // Fill data rows
             int rowNum = 1;
-            for (Account account : bank.getAllAccounts();) {
+            for (Account account : bank.getAccounts()) {
                 Row row = sheet.createRow(rowNum++);
                 row.createCell(0).setCellValue(account.getAccountNumber());
-                row.createCell(1).setCellValue(account.getOwner().getName());
-                row.createCell(2).setCellValue(account.getAccountType());
+                row.createCell(1).setCellValue(account.getClient().getName());
+                row.createCell(2).setCellValue(account.getType());
                 row.createCell(3).setCellValue(account.getBalance());
             }
 
