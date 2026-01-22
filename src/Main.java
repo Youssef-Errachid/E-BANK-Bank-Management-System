@@ -18,6 +18,7 @@ public class Main {
         System.out.println("  6. Delete account");
         System.out.println("  7. Create a savings account");
         System.out.println("  8. Export accounts to Excel");
+        System.out.println("  9. Transfer money");
         System.out.println("  0. Exit");
         System.out.println("========================================");
     }
@@ -43,8 +44,13 @@ public class Main {
                 break;
             case 7:
                 createSavingsAccount();
+                break;
             case 8:
                 exportToExcel();
+                break;
+            case 9:
+                TransferMoney();
+                break;
             case 0:
                 System.out.println("Exit the program");
                 System.exit(0);
@@ -79,31 +85,31 @@ public class Main {
     }
     public static void checkBalance() {
         System.out.println("\t=== CHECK BALANCE ===");
-        String accountNumber = getAccountNumber();
+        String accountNumber = getAccountNumber("Enter account number: ");
         bank.checkBalance(accountNumber);
     }
-    public static String getAccountNumber() {
-        System.out.print("Enter account number: ");
+    public static String getAccountNumber(String message) {
+        System.out.print(message);
         String accountNumber = scanner.nextLine();
         return accountNumber;
     }
     public static void getAmounttodeposit() {
         System.out.println("=== DEPOSIT MONEY ===");
-        String accountNumber = getAccountNumber();
+        String accountNumber = getAccountNumber("Enter account number: ");
         System.out.println("Enter amount to be deposited: ");
         double amount = scanner.nextDouble();
         bank.deposit(accountNumber, amount);
     }
     public static void getAmounttowithdraw() {
         System.out.println("=== WITHDRAW MONEY ===");
-        String accountNumber = getAccountNumber();
+        String accountNumber = getAccountNumber("Enter account number: ");
         System.out.println("Enter amount to be withdrawn: ");
         double amount = scanner.nextDouble();
         bank.withdraw(accountNumber, amount);
     }
     public static void deleteAccount() {
         System.out.println("=== DELETE ACCOUNT ===");
-        String accountNumber = getAccountNumber();
+        String accountNumber = getAccountNumber("Enter account number: ");
         bank.deleteAccount(accountNumber);
     }
     private static void createSavingsAccount() {
@@ -176,7 +182,7 @@ public class Main {
             System.out.println("Error exporting to Excel: " + e.getMessage());
         }
     }
-   static public int getChoicenumber(){
+    static public int getChoicenumber(){
         int number= 0;
        System.out.println("Enter your Choice");
         number = Integer.parseInt(scanner.nextLine());
@@ -185,6 +191,17 @@ public class Main {
        }
        return number;
     }
+    public static void TransferMoney() {
+        System.out.println("=== TRANSFER MONEY ===");
+        String From = getAccountNumber("Enter sender Account Number: ");
+        System.out.println("Enter amount to be transferred: ");
+        double Amount = Double.parseDouble(scanner.nextLine());
+        bank.withdraw(From,Amount);
+        String To = getAccountNumber("Enter sender Account Number: ");
+        bank.deposit(To,Amount);
+
+    }
+
     public static void main(String[] args) {
         char tryagain = 'y';
         do{

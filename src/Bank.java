@@ -23,8 +23,9 @@ public class Bank  {
         return;
     }
     for(Account a : accounts){
+        System.out.println("Account Number" + a.accountNumber);
+        System.out.println("Balance" + a.getBalance());
 
-        System.out.println(a);
     }
 }
     public List<Account> getAccounts() {
