@@ -7,6 +7,7 @@ public class Account {
         this.accountNumber = accountNumber;
         this.balance = initialBalance;
         this.client = client;
+        this.type = type;
     }
     public String getAccountNumber() {
         return accountNumber;
