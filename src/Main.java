@@ -11,7 +11,7 @@ public class Main {
         System.out.println("              MAIN MENU");
         System.out.println("========================================");
         System.out.println("  1. Display all accounts");
-        System.out.println("  2. Create a bank account");
+        System.out.println("  2. create Account ");
         System.out.println("  3. Check balance");
         System.out.println("  4. Deposit money");
         System.out.println("  5. withdraw money");
@@ -22,13 +22,13 @@ public class Main {
         System.out.println("  0. Exit");
         System.out.println("========================================");
     }
-   static private void controller(int choice) {
+    static private void controller(int choice) {
         switch (choice) {
             case 1:
                 Bank.displayAllAccounts();
                 break;
             case 2:
-                getAccountinfo();
+                createClientWithAccount();
                 break;
             case 3:
                 checkBalance();
@@ -43,12 +43,9 @@ public class Main {
                 deleteAccount();
                 break;
             case 7:
-                createSavingsAccount();
-                break;
-            case 8:
                 exportToExcel();
                 break;
-            case 9:
+            case 8:
                 TransferMoney();
                 break;
             case 0:
@@ -57,31 +54,78 @@ public class Main {
                 break;
         }
     }
+    private static void createClientWithAccount() {
 
-    public static void getAccountinfo() {
+        try {
+         addClient();
+            int accountType = getAccounttyp();
+            if (accountType == 1) {
+                createNormalAccout();
+            }
+            else if (accountType == 2) {
+                createSavingsAccount();
+            }
+            else {
+                System.out.println("Invalid account type!");
+                return;
+            }
 
-            System.out.println("=== CREATE BANK ACCOUNT ===");
+        } catch (NumberFormatException e) {
+            System.out.println("Error: Invalid input format!");
+        } catch (Exception e) {
+            System.out.println("Error: " + e.getMessage());
+        }
+    }
+    private static void addClient() {
+        System.out.println("=== ADD NEW CUSTOMER ===");
 
-            System.out.println("Enter Customer ID:");
-            int id = scanner.nextInt();
-            scanner.nextLine();
+        try {
+            System.out.print("Enter Client ID: ");
+            int clientId = Integer.parseInt(scanner.nextLine());
 
-            System.out.println("Enter Customer name:");
-            String name = scanner.nextLine();
+            System.out.print("Enter Client Name: ");
+            String clientName = scanner.nextLine();
 
-            System.out.println("Enter Customer number: ");
+            System.out.print("Enter Customer Number: ");
             String customerNumber = scanner.nextLine();
 
-            Client client = new Client(id,name,customerNumber);
-            Bank.addClient(client);
 
-            System.out.print("Enter account number: ");
-            String accountNumber = scanner.nextLine();
+            Client newClient = new Client(clientId, clientName, customerNumber);
+            Bank.addClient(newClient);
 
-            System.out.print("Enter initial balance: ");
-            double initialBalance = Double.parseDouble(scanner.nextLine());
+            if (bank.findClientByNumber(customerNumber) == null) {
+                System.out.println("Failed to create client. Account creation cancelled.");
+                return;
+            }
 
-            bank.createAccount(accountNumber, initialBalance, customerNumber);
+            System.out.println("Client created successfully!");
+        } catch (NumberFormatException e) {
+            System.out.println("Error: Invalid ID format.");
+        }
+    }
+    public static int getAccounttyp(){
+        System.out.println("\n--- ACCOUNT INFORMATION ---");
+        System.out.println("Select Account Type:");
+        System.out.println("  1. Regular Account");
+        System.out.println("  2. Savings Account");
+        System.out.print("Your choice: ");
+
+        int accountType = Integer.parseInt(scanner.nextLine());
+        return accountType;
+    }
+    public static void createNormalAccout() {
+        String accountType = "Normal";
+
+        System.out.println("Enter Customer Number");
+        String customerNumber = scanner.nextLine();
+
+        System.out.print("Enter Account Number: ");
+        String accountNumber = scanner.nextLine();
+
+        System.out.print("Enter Initial Balance: ");
+        double initialBalance = Double.parseDouble(scanner.nextLine());
+
+        bank.createAccount(accountNumber, initialBalance, customerNumber,accountType);
     }
     public static void checkBalance() {
         System.out.println("\t=== CHECK BALANCE ===");
@@ -114,6 +158,7 @@ public class Main {
     }
     private static void createSavingsAccount() {
         System.out.println("=== CREATE SAVINGS ACCOUNT ===");
+        String accountType = "Savings";
 
         System.out.print("Enter account number: ");
         String accountNumber = scanner.nextLine();
@@ -128,7 +173,7 @@ public class Main {
             System.out.print("Enter interest rate (%): ");
             double interestRate = Double.parseDouble(scanner.nextLine());
 
-            bank.createSavingsAccount(accountNumber, initialBalance, customerNumber, interestRate);
+            bank.createSavingsAccount(accountNumber, initialBalance, customerNumber, interestRate,accountType);
         } catch (NumberFormatException e) {
             System.out.println("Error: Invalid number format.");
         }
@@ -186,8 +231,8 @@ public class Main {
         int number= 0;
        System.out.println("Enter your Choice");
         number = Integer.parseInt(scanner.nextLine());
-       while(number < 0 || number > 9){
-           System.out.println("Enter a number between 0 and 9");
+       while(number < 0 || number > 8){
+           System.out.println("Enter a number between 0 and 8");
        }
        return number;
     }

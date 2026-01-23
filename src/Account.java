@@ -3,7 +3,7 @@ public class Account {
     protected double balance;
     protected String type;
     protected Client client;
-    public Account(String accountNumber, double initialBalance, Client client) {
+    public Account(String accountNumber, double initialBalance, Client client , String type) {
         this.accountNumber = accountNumber;
         this.balance = initialBalance;
         this.client = client;

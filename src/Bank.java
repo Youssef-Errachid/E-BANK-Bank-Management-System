@@ -22,16 +22,34 @@ public class Bank  {
         System.out.println("No accounts found");
         return;
     }
-    for(Account a : accounts){
-        System.out.println("Account Number" + a.accountNumber);
-        System.out.println("Balance" + a.getBalance());
 
-    }
+      for(Account a : accounts){
+          System.out.println("Accounts info : ");
+          System.out.println("Account number: " + a.getAccountNumber());
+          System.out.println("Account Type: " + a.getType());
+          System.out.println("Balance: " + a.getBalance());
+
+          Client client =  a.getClient();
+
+          System.out.println("Client info : ");
+          System.out.println("Client number: " + client.getCustomerNumber());
+          System.out.println("Client name: " + client.getName());
+          System.out.println("Client number: " + client.getCustomerNumber());
+
+          if(a instanceof SavingAccount){
+              SavingAccount savingAccount = (SavingAccount) a;
+              System.out.println("Saving account info : ");
+              System.out.println("Interest rate: " + savingAccount.getInterestRate());
+              System.out.println("potential Interest: "+ savingAccount.calculateInterest());
+
+          }
+      }
+
 }
     public List<Account> getAccounts() {
             return accounts;
         }
-    public boolean createAccount(String accountNumber, double initialBalance, String customerNumber) {
+    public boolean createAccount(String accountNumber, double initialBalance, String customerNumber, String accountType) {
         if (findAccount(accountNumber) != null) {
             System.out.println("this Account already exists");
             return false;
@@ -48,7 +66,7 @@ public class Bank  {
             return false;
         }
 
-        Account account = new Account(accountNumber, initialBalance, client);
+        Account account = new Account(accountNumber, initialBalance, client ,accountType);
         accounts.add(account);
         System.out.println("Account created successfully for " + client.getName());
         return true;
@@ -108,7 +126,7 @@ public class Bank  {
         }
 
     }
-    public boolean createSavingsAccount(String accountNumber, double initialBalance,String customerNumber, double interestRate) {
+    public boolean createSavingsAccount(String accountNumber, double initialBalance, String customerNumber, double interestRate, String accountType) {
             // Check if account number already exists
             if (findAccount(accountNumber) != null) {
                 System.out.println("Error: An account with this number already exists.");
@@ -132,7 +150,7 @@ public class Bank  {
                 return false;
             }
 
-            SavingAccount account = new SavingAccount(accountNumber, initialBalance, client, interestRate);
+            SavingAccount account = new SavingAccount(accountNumber, initialBalance, client, interestRate,accountType);
             accounts.add(account);
             System.out.println("Savings account created successfully for " + client.getName());
             return true;
