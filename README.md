@@ -155,4 +155,4 @@ The exported file contains:
 
 ## Author
 
-Developed as a Java OOP banking system project.
+Youssef Errachid
